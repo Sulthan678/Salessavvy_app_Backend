@@ -18,4 +18,16 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     // SEARCH PRODUCTS
     List<Product> findByNameContainingIgnoreCase(String keyword);
+    
+    
+ // SEARCH SUGGESTIONS
+    List<Product> findTop5ByNameContainingIgnoreCase(String keyword);
+    
+    
+//    SELECT * FROM product WHERE category = ? AND product_id != ?LIMIT 4;
+    List<Product> findTop4ByCategory_CategoryNameAndProductIdNot(
+    		String categoryName,
+    		Integer productId
+    		);
 }
+

@@ -58,4 +58,41 @@ public class ProductService {
         }
         return productRepository.findByNameContainingIgnoreCase(keyword.trim());
     }
+    
+    
+    public Product getProductById(Integer productId) {
+
+        return productRepository.findById(productId)
+                .orElseThrow(() ->
+                        new RuntimeException("Product not found"));
+
+    }
+    
+    public List<String> getSuggestions(String keyword) {
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Product> products = productRepository.findTop5ByNameContainingIgnoreCase(keyword.trim());
+
+        List<String> suggestions = new ArrayList<>();
+
+        for (Product product : products) {
+            suggestions.add(product.getName());
+        }
+        return suggestions;
+    }
+    
+    
+    public List<Product> getSimilarProducts(Integer productId) {
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        return productRepository.findTop4ByCategory_CategoryNameAndProductIdNot(
+                product.getCategory().getCategoryName(),
+                productId
+        );
+    }
 }
