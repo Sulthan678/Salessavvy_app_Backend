@@ -75,7 +75,7 @@ public class AuthenticationFilter implements Filter {
 
         // Handle preflight (OPTIONS) requests
         if (httpRequest.getMethod().equalsIgnoreCase("OPTIONS")) {
-            setCORSHeaders(httpResponse);
+        	chain.doFilter(request, response);
             return;
         }
 
