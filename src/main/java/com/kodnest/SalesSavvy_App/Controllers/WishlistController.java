@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/wishlist")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+// @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class WishlistController {
 
     @Autowired

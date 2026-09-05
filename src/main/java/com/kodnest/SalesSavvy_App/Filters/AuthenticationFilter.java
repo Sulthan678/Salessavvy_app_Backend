@@ -1,5 +1,5 @@
 package com.kodnest.SalesSavvy_App.Filters;
-
+import org.springframework.beans.factory.annotation.Value;
 
 
 import jakarta.servlet.Filter;
@@ -33,7 +33,8 @@ public class AuthenticationFilter implements Filter {
     private final AuthService authService;
     private final UserRepository userRepository;
 
-    private static final String ALLOWED_ORIGIN = "http://localhost:5173";
+    @Value("${CORS_ALLOWED_ORIGIN:http://localhost:5173}")
+    private String allowedOrigin;
 
     private static final String[] UNAUTHENTICATED_PATHS = {
         "/api/users/register",
@@ -124,11 +125,11 @@ public class AuthenticationFilter implements Filter {
     }
 
     private void setCORSHeaders(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
+    	response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setStatus(HttpServletResponse.SC_OK);
+//        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     private void sendErrorResponse(HttpServletResponse response, int statusCode, String message) throws IOException {
@@ -145,6 +146,6 @@ public class AuthenticationFilter implements Filter {
                     .findFirst()
                     .orElse(null);
         }
-        return null;
-    }
+		return null;
+	}
 }

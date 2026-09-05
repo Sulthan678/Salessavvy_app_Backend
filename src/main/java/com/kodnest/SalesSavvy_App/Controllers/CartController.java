@@ -17,7 +17,7 @@ import com.kodnest.SalesSavvy_App.Services.CartService;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+// @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 @RequestMapping("/api/cart")
 public class CartController {
 

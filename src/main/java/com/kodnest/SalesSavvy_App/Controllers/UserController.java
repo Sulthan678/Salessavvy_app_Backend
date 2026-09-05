@@ -16,7 +16,7 @@ import com.kodnest.SalesSavvy_App.Services.UserService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+// @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/users")
 public class UserController {
 
